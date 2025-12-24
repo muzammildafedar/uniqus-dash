@@ -2,6 +2,7 @@ import { memo, useCallback } from 'react'
 import { type Order } from '../../constants/dashboardData'
 import { DASHBOARD_TEXTS, STATUS_LABELS } from '../../constants/dashboardData'
 import { Card, Button } from '../ui'
+import imagePng from '../../assets/image.png'
 
 interface OrdersTableProps {
   orders: Order[]
@@ -113,7 +114,7 @@ const OrdersTable = memo(function OrdersTable({
             <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
               <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                 <img 
-                  src={order.image} 
+                  src={imagePng} 
                   alt={order.product}
                   className="w-full h-full object-cover"
                   onError={handleImageError}

@@ -2,6 +2,7 @@ import { memo, useCallback } from 'react'
 import { type Invoice } from '../../constants/dashboardData'
 import { DASHBOARD_TEXTS, STATUS_LABELS } from '../../constants/dashboardData'
 import { Card, Button } from '../ui'
+import icon9 from '../../assets/icon_9.png'
 
 interface InvoicesTableProps {
   invoices: Invoice[]
@@ -93,9 +94,7 @@ const InvoicesTable = memo(function InvoicesTable({
             {/* Invoice Info */}
             <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
               <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
+                <img src={icon9} className='w-4 h-4' />
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="text-xs sm:text-sm font-semibold text-gray-900 mb-0.5 sm:mb-1 truncate">
