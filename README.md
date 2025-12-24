@@ -32,9 +32,7 @@ A modern, responsive SaaS dashboard built with React, TypeScript, and Tailwind C
 - **Tailwind CSS 4.1.18** - Utility-first CSS framework with latest features
 - **Vite (Rolldown) 7.2.5** - Ultra-fast build tool and development server
 
-### State Management & Routing
-- **Redux Toolkit 2.11.2** - Modern Redux for state management
-- **React Redux 9.2.0** - React bindings for Redux
+### Routing
 - **React Router DOM 7.11.0** - Client-side routing
 
 ### Charts & Visualization
@@ -70,7 +68,6 @@ uniqus-dash/
 │   │   │   ├── InvoicesTable.tsx     # Invoices data table
 │   │   │   ├── OrdersTable.tsx       # Orders data table
 │   │   │   └── index.ts              # Component exports
-│   │   ├── features/         # Feature-specific components (empty)
 │   │   ├── icons/            # Custom icon components
 │   │   │   ├── SidebarIcons.tsx      # Navigation icons
 │   │   │   └── index.ts              # Icon exports
@@ -111,9 +108,6 @@ uniqus-dash/
 │   │   ├── Box.tsx                   # Box/Storage page
 │   │   ├── Folder.tsx                # Folder management page
 │   │   └── index.ts                  # Page exports
-│   ├── store/                # Redux store configuration
-│   │   └── slices/                   # Redux slices (empty - ready for state)
-│   ├── types/                # TypeScript type definitions (empty)
 │   ├── utils/                # Utility functions
 │   │   ├── cn.ts                     # Class name utility (clsx + tailwind-merge)
 │   │   ├── errorHandling.ts          # Error handling utilities
@@ -122,7 +116,6 @@ uniqus-dash/
 │   ├── App.tsx               # Main App component
 │   ├── main.tsx              # Application entry point
 │   └── index.css             # Global styles and Tailwind imports
-├── .env                      # Environment variables
 ├── .env.example              # Environment variables template
 ├── index.html                # HTML template
 ├── package.json              # Dependencies and scripts
@@ -139,7 +132,6 @@ uniqus-dash/
 ### `/src/components/`
 **Purpose**: Contains all React components organized by functionality
 - **`dashboard/`**: Components specific to dashboard functionality (stats, tables)
-- **`features/`**: Feature-specific components (currently empty, ready for expansion)
 - **`icons/`**: Custom icon components and SVG wrappers
 - **`layout/`**: Layout-related components (header, sidebar, page wrappers)
 - **`ui/`**: Reusable UI components following design system patterns
@@ -162,16 +154,6 @@ uniqus-dash/
 - Each file represents a distinct page/route in the application
 - Organized alphabetically for easy navigation
 - Includes main dashboard and all secondary pages
-
-### `/src/store/`
-**Purpose**: Redux Toolkit store configuration and state management
-- **`slices/`**: Redux slices for different feature domains (ready for implementation)
-- Centralized state management for complex application state
-
-### `/src/types/`
-**Purpose**: TypeScript type definitions and interfaces
-- Currently empty but structured for type definitions
-- Shared types across components and features
 
 ### `/src/utils/`
 **Purpose**: Utility functions and helper methods
@@ -245,20 +227,14 @@ npm install
 yarn install
 ```
 
-3. **Set up environment variables**
-```bash
-cp .env.example .env
-# Edit .env with your configuration
-```
-
-4. **Start the development server**
+3. **Start the development server**
 ```bash
 npm run dev
 # or
 yarn dev
 ```
 
-5. **Open your browser**
+4. **Open your browser**
 Navigate to `http://localhost:5173` (Vite's default port)
 
 ### Available Scripts
@@ -283,14 +259,6 @@ The build process uses TypeScript compilation followed by Vite bundling:
 - **`/icons`**: Centralized icon management for consistency
 
 **Rationale**: This structure promotes reusability, maintainability, and clear separation of concerns. It makes it easier for developers to locate and modify components based on their purpose.
-
-### State Management Strategy
-**Decision**: Redux Toolkit with prepared slice structure
-- Centralized state management ready for complex application state
-- Slice-based organization for feature-specific state
-- Currently minimal state with room for expansion
-
-**Rationale**: Redux Toolkit provides excellent developer experience with less boilerplate than traditional Redux, while maintaining predictable state updates and time-travel debugging capabilities.
 
 ### Styling Approach
 **Decision**: Tailwind CSS with custom design system
@@ -382,7 +350,7 @@ Modern ESLint configuration with:
 
 #### Bundle Size vs. Feature Richness
 **Trade-off**: Included comprehensive libraries for future extensibility
-- **Decision**: Added Chart.js and full Redux Toolkit even with minimal current usage
+- **Decision**: Added Chart.js for data visualization capabilities
 - **Impact**: Larger initial bundle size but ready for feature expansion
 - **Mitigation**: Tree-shaking and code splitting can be implemented as needed
 
@@ -398,22 +366,14 @@ Modern ESLint configuration with:
 - **Impact**: More development time but complete design control
 - **Mitigation**: Reusable component architecture reduces duplication
 
-#### State Complexity vs. Simplicity
-**Trade-off**: Redux setup for future complexity vs. simple useState
-- **Decision**: Implemented Redux Toolkit structure even with minimal state needs
-- **Impact**: More initial setup but scalable for complex state management
-- **Mitigation**: Can start with local state and migrate to Redux as needed
-
 ### Future Considerations
 
 #### Scalability Concerns
 - **Component Library**: May need to extract UI components into separate package
-- **State Management**: Redux slices need implementation for complex features
 - **Performance**: Virtual scrolling for large data tables
 - **Testing**: Comprehensive test suite needed for production readiness
 
 #### Technical Debt
-- **Type Definitions**: `/src/types/` directory needs population with proper interfaces
 - **Error Handling**: More robust error boundaries and error reporting
 - **Accessibility**: WCAG compliance improvements needed
 - **Documentation**: Component documentation and Storybook integration
@@ -470,25 +430,6 @@ const buttonClass = cn(
 );
 ```
 
-### State Management
-
-The project uses Redux Toolkit for state management:
-- **Store configuration** in `src/store/`
-- **Slices** for different feature domains (ready for implementation)
-- **Typed hooks** for type-safe Redux usage
-
-```typescript
-// Future slice example
-// src/store/slices/dashboardSlice.ts
-import { createSlice } from '@reduxjs/toolkit';
-
-const dashboardSlice = createSlice({
-  name: 'dashboard',
-  initialState: { /* state */ },
-  reducers: { /* reducers */ }
-});
-```
-
 ## 🎯 Key Features Implemented
 
 ### Dashboard Overview
@@ -529,33 +470,11 @@ The application includes multiple dashboard pages:
 
 ## 🌍 Environment Variables
 
-Copy `.env.example` to `.env` and configure:
-
-```env
-# API Configuration
-VITE_API_BASE_URL=http://localhost:3000/api
-
-# Application Settings
-VITE_APP_NAME=Uniqus Dashboard
-VITE_APP_VERSION=1.0.0
-
-# Development Settings
-VITE_DEV_MODE=true
-```
-
-### Environment Variable Usage
-- **`VITE_API_BASE_URL`**: Base URL for API calls (when implemented)
-- **`VITE_APP_NAME`**: Application name displayed in UI
-- **`VITE_APP_VERSION`**: Version number for about/info sections
-- **`VITE_DEV_MODE`**: Enable development-specific features
-
 ## 🔮 Future Enhancements
 
 ### Immediate Roadmap
 - **API Integration**: Connect components to real backend services
-- **State Management**: Implement Redux slices for complex state
 - **Authentication**: Add user authentication and authorization
-- **Data Visualization**: Integrate Chart.js for dashboard analytics
 - **Form Handling**: Add form validation and submission logic
 
 ### Medium-term Goals
@@ -572,44 +491,13 @@ VITE_DEV_MODE=true
 - **Plugin System**: Extensible architecture for third-party integrations
 - **Multi-tenant Support**: SaaS-ready multi-organization support
 
-## 🧪 Testing Strategy
-
-### Current State
-- **Error Boundaries**: Basic error handling implemented
-- **TypeScript**: Compile-time error prevention
-- **ESLint**: Code quality and consistency checks
-
-### Recommended Testing Approach
-```bash
-# Install testing dependencies
-npm install --save-dev @testing-library/react @testing-library/jest-dom vitest jsdom
-
-# Component testing
-npm install --save-dev @testing-library/user-event
-
-# E2E testing  
-npm install --save-dev playwright
-```
-
-### Testing Structure
-```
-src/
-├── __tests__/              # Test files
-│   ├── components/         # Component tests
-│   ├── hooks/             # Hook tests
-│   ├── utils/             # Utility tests
-│   └── pages/             # Page tests
-└── test-utils/            # Testing utilities
-```
-
-## 🤝 Contributing
+## �  Contributing
 
 ### Development Guidelines
 1. **Follow the established code style** and component patterns
 2. **Write meaningful commit messages** using conventional commits
 3. **Add TypeScript types** for all new features and components
-4. **Test components thoroughly** before submitting PRs
-5. **Update documentation** for any new features or changes
+4. **Update documentation** for any new features or changes
 
 ### Code Style
 - Use **functional components** with hooks
