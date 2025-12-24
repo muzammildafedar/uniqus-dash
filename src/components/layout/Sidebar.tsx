@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo, useEffect } from 'react'
 import { cn } from '../../utils/cn'
 import SidebarMenu from './SidebarMenu'
 import { Ellipsis } from 'lucide-react'
@@ -38,6 +38,34 @@ const Sidebar = memo(function Sidebar({
   isOpen = true, 
   onClose 
 }: SidebarProps) {
+  // Prevent body scroll when sidebar is open on mobile
+  useEffect(() => {
+    // Only apply scroll lock on mobile/tablet (not desktop)
+    const isMobile = window.innerWidth < 1024 // lg breakpoint
+    
+    if (isOpen && isMobile) {
+      // Store current scroll position
+      const scrollY = window.scrollY
+      
+      // Add class to prevent body scroll
+      document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.width = '100%'
+      
+      return () => {
+        // Restore body scroll and position
+        document.body.style.overflow = ''
+        document.body.style.position = ''
+        document.body.style.top = ''
+        document.body.style.width = ''
+        
+        // Restore scroll position
+        window.scrollTo(0, scrollY)
+      }
+    }
+  }, [isOpen])
+
   const handleOverlayClick = useCallback(() => {
     onClose?.()
   }, [onClose])
