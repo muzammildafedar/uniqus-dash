@@ -6,7 +6,6 @@ import {
   LinearScale,
   PointElement,
   LineElement,
-  Filler,
 } from 'chart.js'
 import { type StatCard as StatCardType } from '../../constants/dashboardData'
 
@@ -14,8 +13,7 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
-  Filler
+  LineElement
 )
 
 interface StatCardProps {
@@ -45,20 +43,17 @@ const StatCard = memo(function StatCard({ stat }: StatCardProps) {
       income: {
         // Purple sine wave - exactly 2 complete sine waves with upward trend
         data: generateSineWave(8, 2.0, 0, 50, 25), // frequency 2.0 = exactly 2 complete waves
-        color: '#8B5CF6',
-        backgroundColor: 'rgba(139, 92, 246, 0.15)'
+        color: '#8B5CF6'
       },
       leads: {
         // Blue sine wave - exactly 2 complete sine waves 
         data: generateSineWave(15, 2.0, 0, 25, 15), // frequency 2.0 = exactly 2 complete waves
-        color: '#60A5FA',
-        backgroundColor: 'rgba(96, 165, 250, 0.15)'
+        color: '#60A5FA'
       },
       conversion: {
         // Red/coral sine wave - exactly 2 complete sine waves with downward trend
         data: generateSineWave(10, 2.0, 0, 60, -25), // frequency 2.0 = exactly 2 complete waves
-        color: '#F87171',
-        backgroundColor: 'rgba(248, 113, 113, 0.15)'
+        color: '#F87171'
       }
     }
 
@@ -70,9 +65,9 @@ const StatCard = memo(function StatCard({ stat }: StatCardProps) {
         {
           data: config.data,
           borderColor: config.color,
-          backgroundColor: config.backgroundColor,
+          backgroundColor: 'transparent',
           borderWidth: 3, // Slightly thicker line to match image
-          fill: true,
+          fill: false, // Remove the fill/shadow area
           tension: 0.7, // Higher tension for smoother curves
           pointRadius: config.data.map((_, index) => index === Math.floor(config.data.length / 2) ? 3 : 0), // Only show dot in the middle
           pointHoverRadius: config.data.map((_, index) => index === Math.floor(config.data.length / 2) ? 5 : 0),

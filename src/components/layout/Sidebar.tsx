@@ -167,7 +167,7 @@ const Sidebar = memo(function Sidebar({
           
           {/* Navigation Icons with Profile at Bottom */}
           <div className="flex-1 flex flex-col">
-            <SidebarMenu />
+            <SidebarMenu onItemClick={onClose} />
           </div>
         </div>
 

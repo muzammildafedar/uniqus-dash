@@ -44,7 +44,7 @@ const InvoicesTable = memo(function InvoicesTable({
         {/* Tabs */}
         <div className="flex items-center space-x-1 sm:space-x-2" role="tablist">
           <button 
-            className="text-xs font-medium text-gray-900 bg-gray-100 px-2 py-1 rounded-lg border border-gray-200"
+            className="text-xs font-medium text-gray-900 px-2 py-1 rounded-lg border border-gray-200"
             role="tab"
             aria-selected="true"
           >

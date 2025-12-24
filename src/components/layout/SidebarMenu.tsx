@@ -15,17 +15,25 @@ const SidebarMenu = memo(function SidebarMenu({ onItemClick }: SidebarMenuProps)
     if (item.href) {
       navigate(item.href)
     }
-    onItemClick?.(item)
+    
+    // Close sidebar on mobile after navigation
+    if (window.innerWidth < 1024) { // lg breakpoint
+      onItemClick?.(item)
+    }
   }, [navigate, onItemClick])
 
   const handleProfileClick = useCallback(() => {
     navigate('/profile')
-    onItemClick?.({
-      id: 'profile',
-      label: 'Profile',
-      href: '/profile',
-      iconId: 'icon1' // Using a default icon
-    })
+    
+    // Close sidebar on mobile after navigation
+    if (window.innerWidth < 1024) { // lg breakpoint
+      onItemClick?.({
+        id: 'profile',
+        label: 'Profile',
+        href: '/profile',
+        iconId: 'icon1' // Using a default icon
+      })
+    }
   }, [navigate, onItemClick])
 
   return (
@@ -43,7 +51,7 @@ const SidebarMenu = memo(function SidebarMenu({ onItemClick }: SidebarMenuProps)
               {/* Active Background */}
               {isActive && (
                 <>
-                  <div className="absolute w-12 h-12 bg-blue-50 rounded border border-blue-100" aria-hidden="true" />
+                  <div className="absolute w-12 h-12 bg-blue-50 rounded" aria-hidden="true" />
                   {/* Active Line */}
                   <div className="absolute right-0 top-2 bottom-2 w-0.5 bg-blue-500 rounded-full" aria-hidden="true" />
                 </>
